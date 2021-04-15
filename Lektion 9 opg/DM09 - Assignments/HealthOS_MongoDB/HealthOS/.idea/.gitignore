@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../:\Users\alexv\Documents\GitHub\TA2\DM\Lektion 9 opg\DM09 - Assignments\HealthOS_MongoDB\HealthOS\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

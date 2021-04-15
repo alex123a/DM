@@ -13,7 +13,9 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +31,7 @@ public class App {
         MongoCollection usersCollection = mongoDatabase.getCollection("Users");
 
         // Creating json object
-        Document johndoe = new Document("_id", "1")
+        Document johndoe = new Document("_id", 1)
                 .append("name", "John Doe")
                 .append("cpr", "111111-1111")
                 .append("departments", Arrays.asList("Odense", "Aarhus", "Vejle"));
@@ -52,7 +54,23 @@ public class App {
         MongoClient pojoClient = MongoClients.create(mongoClientSettings);
 
         MongoDatabase pojoDatabase = pojoClient.getDatabase("MyWebsite");
-        MongoCollection pojoUsersCollection = pojoDatabase.getCollection("Users");
+        MongoCollection<User> pojoUsersCollection = pojoDatabase.getCollection("Users", User.class);
 
+        // Inserting a single user using pojo
+        pojoUsersCollection.insertOne(new User(2, "Jane Doe", "111111-1110"));
+
+        // Inserting multiple users
+        List<User> usersList = new ArrayList<>();
+        usersList.add(new User(3, "Anne Doe", "111111-1110"));
+        usersList.add(new User(4, "Pete Doe", "111111-1110"));
+        pojoUsersCollection.insertMany(usersList);
+
+        // Querying the database with pojo
+        ArrayList<User> foundUsers;
+        pojoUsersCollection.find(Filters.eq("cpr", "111111-1110")).into(foundUsers = new ArrayList<>());
+
+        for (User user: foundUsers) {
+            System.out.println("The user " + user.getName() + " was found with the CPR number " + user.getCpr());
+        }
     }
 }
