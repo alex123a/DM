@@ -1,0 +1,7 @@
+dk\sdu\mmmi\dm\healthos\domain\IPersistanceHandler.class
+dk\sdu\mmmi\dm\healthos\domain\Patient.class
+dk\sdu\mmmi\dm\healthos\domain\Bed.class
+dk\sdu\mmmi\dm\healthos\domain\Employee.class
+dk\sdu\mmmi\dm\healthos\domain\Admission.class
+dk\sdu\mmmi\dm\healthos\persistance\PersistanceHandler.class
+dk\sdu\mmmi\dm\healthos\presentation\Main.class

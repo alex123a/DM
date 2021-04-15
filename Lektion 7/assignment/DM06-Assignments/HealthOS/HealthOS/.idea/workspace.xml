@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8e4a580-56e1-447c-92ff-d3634389c0fc" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1ZJM33dI6oflZ0tiUTO2twWo14T" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dk.sdu.mmmi.dm.healthos.presentation.Main" />
+      <module name="HealthOS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.sdu.mmmi.dm.healthos.presentation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8e4a580-56e1-447c-92ff-d3634389c0fc" name="Default Changelist" comment="" />
+      <created>1584552540662</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584552540662</updated>
+      <workItem from="1584552544597" duration="1506000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="991" y="491" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584553158910">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state x="991" y="491" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688@0.0.3072.1688" timestamp="1584553158910" />
+    <state x="1298" y="485" key="#com.intellij.ide.util.MemberChooser" timestamp="1584552913731">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state x="1298" y="485" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688@0.0.3072.1688" timestamp="1584552913731" />
+    <state x="995" y="754" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1584553200161">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state x="995" y="754" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.3072.1688@0.0.3072.1688" timestamp="1584553200161" />
+    <state width="3017" height="481" key="GridCell.Tab.0.bottom" timestamp="1584554061170">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state width="3017" height="481" key="GridCell.Tab.0.bottom/0.0.3072.1688@0.0.3072.1688" timestamp="1584554061170" />
+    <state width="3017" height="481" key="GridCell.Tab.0.center" timestamp="1584554061170">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state width="3017" height="481" key="GridCell.Tab.0.center/0.0.3072.1688@0.0.3072.1688" timestamp="1584554061170" />
+    <state width="3017" height="481" key="GridCell.Tab.0.left" timestamp="1584554061169">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state width="3017" height="481" key="GridCell.Tab.0.left/0.0.3072.1688@0.0.3072.1688" timestamp="1584554061169" />
+    <state width="3017" height="481" key="GridCell.Tab.0.right" timestamp="1584554061170">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state width="3017" height="481" key="GridCell.Tab.0.right/0.0.3072.1688@0.0.3072.1688" timestamp="1584554061170" />
+  </component>
+</project>
