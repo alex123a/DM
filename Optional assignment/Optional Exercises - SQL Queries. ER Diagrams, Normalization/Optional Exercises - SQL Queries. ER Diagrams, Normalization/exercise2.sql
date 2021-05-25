@@ -1,5 +1,5 @@
 -- Jeg vælger at lade være med at lave en Person tabel, dette vælger jeg for at undgå at skabe for mange joins når man skal query data ud.
-
+-- work_phone er en VARCHAR(12) da der kan være forskel på telefon numre rundt om i verden, derfor ønsker jeg ikke at begrænse til et dansk nummer med CHAR(8) eller lignende
 CREATE TABLE employees(
     id serial PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -8,21 +8,17 @@ CREATE TABLE employees(
     work_phone VARCHAR(12) NOT NULL
 );
 
--- work_phone er en VARCHAR(12) da der kan være forskel på telefon numre rundt om i verden, derfor ønsker jeg ikke at begrænse til et dansk nummer med CHAR(8) eller lignende
-
-CREATE TABLE pilots(
-    id INT PRIMARY KEY,
-    ADD CONSTRAINT pilot_id FOREIGN KEY (id) REFERENCES employees (id) ON DELETE CASCADE;
+CREATE TABLE roles(
+    id serial PRIMARY KEY,
+    role VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE stewardess(
-    id INT PRIMARY KEY,
-    ADD CONSTRAINT stewardess_id FOREIGN KEY (id) REFERENCES employees (id) ON DELETE CASCADE;
-);
-
-CREATE TABLE cooks(
-    id INT PRIMARY KEY,
-    ADD CONSTRAINT cook_id FOREIGN KEY (id) REFERENCES employees (id) ON DELETE CASCADE;
+CREATE TABLE work_as(
+    id serial PRIMARY KEY,
+    employee_id INT NOT NULL,
+    role_id INT NOT NULL,
+    CONSTRAINT employee_id_constraint FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+    CONSTRAINT role_id_constraint FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE customers(
@@ -54,7 +50,7 @@ CREATE TABLE tickets(
     id serial PRIMARY KEY,
     price INT NOT NULL,
     flight_id INT NOT NULL,
-    ADD CONSTRAINT flight_ticket FOREIGN KEY (flight_id) REFERENCES flights(id) ON DELETE CASCADE;
+    CONSTRAINT flight_ticket FOREIGN KEY (flight_id) REFERENCES flights(id) ON DELETE CASCADE
 );
 
 -- Kunder skal kunne købe flere end en billet, hvis det f.eks. er en far som køber billetter til hele familien.
@@ -62,8 +58,8 @@ CREATE TABLE tickets_bought(
     id serial PRIMARY KEY,
     ticket_id INT NOT NULL,
     customer_id INT NOT NULL,
-    ADD CONSTRAINT tickets_bought_constraint FOREIGN KEY (ticket_id) REFERENCES tickets (id) ON DELETE CASCADE,
-    ADD CONSTRAINT customer_on_tickets_bought FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE
+    CONSTRAINT tickets_bought_constraint FOREIGN KEY (ticket_id) REFERENCES tickets(id) ON DELETE CASCADE,
+    CONSTRAINT customer_on_tickets_bought FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
 );
 
 -- Her kan customer kun forekomme en gang. Selvom en customer kan købe billetter til hele familien, så tolker jeg det som
@@ -73,8 +69,8 @@ CREATE TABLE passengers_on(
     id serial PRIMARY KEY,
     customer_id INT NOT NULL,
     flight_id INT NOT NULL,
-    ADD CONSTRAINT passengers_on_plane FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE,
-    ADD CONSTRAINT flight_for_passenger FOREIGN KEY (flight_id) REFERENCES flights (id) ON DELETE CASCADE
+    CONSTRAINT passengers_on_plane FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+    CONSTRAINT flight_for_passenger FOREIGN KEY (flight_id) REFERENCES flights(id) ON DELETE CASCADE
 );
 
 -- En employee kan kun være på en flight en gang
@@ -82,6 +78,79 @@ CREATE TABLE crew_on(
     id serial PRIMARY KEY,
     employee_id INT NOT NULL,
     flight_id INT NOT NULL,
-    ADD CONSTRAINT employees_on_flight FOREIGN KEY (employee_id) REFERENCES employees (id) ON DELETE CASCADE,
-    ADD CONSTRAINT flight_for_crew FOREIGN KEY (flight_id) REFERENCES flights (id) ON DELETE CASCADE
+    CONSTRAINT employees_on_flight FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+    CONSTRAINT flight_for_crew FOREIGN KEY (flight_id) REFERENCES flights(id) ON DELETE CASCADE
 );
+
+-- Data
+INSERT INTO employees(first_name, last_name, work_email, work_phone)
+VALUES ('Børge', 'Søndergaard', 'sej@mail.com', '12345678');
+INSERT INTO employees(first_name, last_name, work_email, work_phone)
+VALUES ('Buk', 'Reje', 'sejeReje@mail.com', '12385678');
+INSERT INTO employees(first_name, last_name, work_email, work_phone)
+VALUES ('Sejt', 'Klap', 'sejKlap@mail.com', '32345679');
+INSERT INTO employees(first_name, last_name, work_email, work_phone)
+VALUES ('Nej', 'Ja', 'sejNejJa@mail.com', '12347678');
+
+INSERT INTO roles(role) VALUES ('cook');
+INSERT INTO roles(role) VALUES ('pilot');
+INSERT INTO roles(role) VALUES ('stewardess');
+
+INSERT INTO work_as(employee_id, role_id) VALUES (1, 2);
+INSERT INTO work_as(employee_id, role_id) VALUES (2, 1);
+INSERT INTO work_as(employee_id, role_id) VALUES (2, 3);
+INSERT INTO work_as(employee_id, role_id) VALUES (3, 1);
+INSERT INTO work_as(employee_id, role_id) VALUES (4, 3);
+
+INSERT INTO customers(first_name, last_name, email, phone_number) VALUES ('fuck', 'fucker', 'fuck@gmail.com', '12345668');
+INSERT INTO customers(first_name, last_name, email, phone_number) VALUES ('ingen', 'ide', 'noidea@sejt.com', '12345578');
+INSERT INTO customers(first_name, last_name, email, phone_number) VALUES ('fuck2', 'fucker2', 'fuck2@gmail.com', '22345678');
+INSERT INTO customers(first_name, last_name, email, phone_number) VALUES ('fuck3', 'fucker3', 'fuck2@gmail.com', '32345678');
+
+INSERT INTO airports(airport_name, city_name) VALUES ('Singapore', 'Singapore Airport');
+INSERT INTO airports(airport_name, city_name) VALUES ('Billund', 'Billund Airport');
+INSERT INTO airports(airport_name, city_name) VALUES ('Amsterdam', 'Amsterdam Airport');
+
+INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of_seats)
+VALUES (2, 3, '05-06-2020', '06-06-2020', 300);
+INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of_seats)
+VALUES (1, 3, '07-06-2020', '07-06-2020', 330);
+INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of_seats)
+VALUES (2, 1, '05-06-2020', '06-06-2020', 300);
+
+INSERT INTO tickets(price, flight_id) VALUES (400, 1);
+INSERT INTO tickets(price, flight_id) VALUES (500, 2);
+INSERT INTO tickets(price, flight_id) VALUES (300, 3);
+INSERT INTO tickets(price, flight_id) VALUES (400, 3);
+
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (1, 1);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (1, 1);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (1, 2);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (2, 3);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (3, 4);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (3, 2);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (4, 1);
+INSERT INTO tickets_bought(ticket_id, customer_id) VALUES (4, 3);
+
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (1, 1);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (3, 1);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (2, 1);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (3, 2);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (4, 3);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (2, 3);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (1, 3);
+INSERT INTO passengers_on(customer_id, flight_id) VALUES (3, 3);
+
+INSERT INTO crew_on(employee_id, flight_id) VALUES (1, 1);
+INSERT INTO crew_on(employee_id, flight_id) VALUES (2, 1);
+INSERT INTO crew_on(employee_id, flight_id) VALUES (1, 2);
+INSERT INTO crew_on(employee_id, flight_id) VALUES (2, 2);
+INSERT INTO crew_on(employee_id, flight_id) VALUES (3, 2);
+INSERT INTO crew_on(employee_id, flight_id) VALUES (1, 3);
+
+-- Queries
+SELECT * FROM employees WHERE work_phone = '12345678';
+
+SELECT * FROM customers WHERE id = 1;
+
+SELECT * FROM employees WHERE work_email = 'sejeReje@mail.com';
