@@ -117,6 +117,10 @@ INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of
 VALUES (1, 3, '07-06-2020', '07-06-2020', 330);
 INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of_seats)
 VALUES (2, 1, '05-06-2020', '06-06-2020', 300);
+INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of_seats)
+VALUES (2, 1, '05-07-2020', '06-07-2020', 300);
+INSERT INTO flights(origin, destination, departure_time, arrival_time, number_of_seats)
+VALUES (1, 3, '07-06-2020', '07-06-2020', 330);
 
 INSERT INTO tickets(price, flight_id) VALUES (400, 1);
 INSERT INTO tickets(price, flight_id) VALUES (500, 2);
@@ -154,3 +158,19 @@ SELECT * FROM employees WHERE work_phone = '12345678';
 SELECT * FROM customers WHERE id = 1;
 
 SELECT * FROM employees WHERE work_email = 'sejeReje@mail.com';
+
+SELECT * FROM customers cu INNER JOIN passengers_on pa ON cu.id = pa.customer_id, flights f
+WHERE f.id = pa.flight_id AND f.id = 1;
+
+SELECT * FROM flights WHERE destination = 3 AND arrival_time > '01-06-2020' AND arrival_time < '10-06-2020';
+
+
+-- Gider ikke til at lave sidste query for at få all passengers på et fly til paris på en
+-- bestemt dato. Det er bare at kombinere de to ovenstående queries.
+
+
+-- Index
+-- Laver index på ticket price, da det kunne forestilles at folk søger efter prisniveau.
+CREATE INDEX ON tickets(price);
+
+-- Function and trigger
