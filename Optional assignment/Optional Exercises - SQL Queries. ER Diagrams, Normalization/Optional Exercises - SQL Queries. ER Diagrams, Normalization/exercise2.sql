@@ -173,4 +173,7 @@ SELECT * FROM flights WHERE destination = 3 AND arrival_time > '01-06-2020' AND 
 -- Laver index på ticket price, da det kunne forestilles at folk søger efter prisniveau.
 CREATE INDEX ON tickets(price);
 
+-- Tilføjer lige en kolonne til pladser tilbage på flyet for at lave triggeren under
+ALTER TABLE flights ADD COLUMN seats_left INT SET DEFAULT 300;
+
 -- Function and trigger
