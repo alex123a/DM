@@ -174,6 +174,24 @@ SELECT * FROM flights WHERE destination = 3 AND arrival_time > '01-06-2020' AND 
 CREATE INDEX ON tickets(price);
 
 -- Tilføjer lige en kolonne til pladser tilbage på flyet for at lave triggeren under
-ALTER TABLE flights ADD COLUMN seats_left INT SET DEFAULT 300;
+ALTER TABLE flights ADD COLUMN seats_left INT DEFAULT 300;
 
 -- Function and trigger
+CREATE OR REPLACE FUNCTION update_seats_left_on_flight()
+	RETURNS TRIGGER
+AS $$
+DECLARE
+	passengers_on_board integer = 0;
+	flights_id CURSOR FOR SELECT DISTINCT(flights.id) AS id FROM flights;
+BEGIN
+	FOR the_flight_id IN flights_id LOOP
+		SELECT COUNT(*) INTO passengers_on_board FROM passengers_on pa WHERE pa.flight_id = the_flight_id.id;
+		UPDATE flights SET seats_left = number_of_seats - passengers_on_board WHERE the_flight_id.id = flights.id;
+	END LOOP;
+	RETURN NEW;
+END; $$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER update_number_of_seats_left_trigger
+	AFTER INSERT OR DELETE ON passengers_on
+	EXECUTE PROCEDURE update_seats_left_on_flight();
