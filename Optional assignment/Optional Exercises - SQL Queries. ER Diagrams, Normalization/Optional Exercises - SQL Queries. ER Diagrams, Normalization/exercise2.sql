@@ -159,6 +159,8 @@ SELECT * FROM customers WHERE id = 1;
 
 SELECT * FROM employees WHERE work_email = 'sejeReje@mail.com';
 
+SELECT * FROM customers WHERE email LIKE '%@gmail.com';
+
 SELECT * FROM customers cu INNER JOIN passengers_on pa ON cu.id = pa.customer_id, flights f
 WHERE f.id = pa.flight_id AND f.id = 1;
 
