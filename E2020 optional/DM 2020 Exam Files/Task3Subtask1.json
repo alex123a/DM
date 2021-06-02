@@ -1,0 +1,31 @@
+[
+    {
+        "_id": 1,
+        "name": "Oneplus 7",
+        "manufacturer": "Oneplus",
+        "price": 4000,
+        "owners": [
+            {
+                "name": "Karl Børge"
+            },
+            {
+                "name": "Peter Andersen"
+            }
+        ]
+    },
+
+    {
+        "_id": 2,
+        "name": "Iphone",
+        "manufacturer": "Apple",
+        "price": 10000,
+        "owners": [
+            {
+                "name": "Karl Christensen"
+            },
+            {
+                "name": "Anders Andersen"
+            }
+        ]
+    }
+]

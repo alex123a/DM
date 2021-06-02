@@ -1,0 +1,14 @@
+1. Based on the interview results with John from “Make Me Mobile!” from Task 1 Subtask 1, should they use a relational database or NoSQL database? 
+Explain your reasoning for why they should make that choice, and what the benefits would be to go in the other direction of your recommendation. 
+
+Jeg vil sige den bedste database for "Make me Mobile!", ville være en relational database. Dette skyldes at i dette tilfælde betyder relationerne meget i mellem de forskellige typer af objekter i forhold til fx documentbased databaser.
+Derudover er der også en fordel at der er denne inddeling af data i relevante tabeller, da meget data skal der ikke køres over i bestemte queries. Derudover er der heller ikke brug for at have NoSQL i forhold til
+hvor meget data der skal køres igennem, da til en køreskole vil der aldrig komme så meget data at databasen vil blive påvirket af at det er en relational database.
+
+2. Explain the difference between Horizontal and Vertical Partitioning/Sharding, and how the concept is different from Horizontal and Vertical Scaling.
+
+Sharding er hvor man deler data fra samme tabel ud i flere databaser.
+Vertical sharding er hvor man f.eks. tager de første 3 attributter i en tabel og putter dem i en database, hvor de sidste 2 attributter i samme tabel bliver puttet i en anden database.
+Horizontal sharding er hvor man i stedet for at dele efter attributter, så tager man en række records og putter i de forskellige databaser, dette gør at alt data vedrørende en record er i samme database.
+Scaling er måden man opgradere databasen på. Ved vertical køber man bedre hardware og udskifter det man allerede har (således man opgradere sin eksisterende database) og ved horizontal køber man mere hardware
+således der kan opstilles flere servere.
