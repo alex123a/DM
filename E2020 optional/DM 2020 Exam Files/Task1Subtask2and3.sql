@@ -68,7 +68,21 @@ CREATE TABLE driving_hours(
     customer_id REFERENCES customer(id) NOT NULL
 );
 
-// Når ikke at putte data ind i databasen så laver queries i stedet
+INSERT INTO customer(CPR_number, phone, email, first_name, last_name)
+VALUES ('3425233435', '23456789','some.email@gmail.com',
+	   'someFirstName', 'someLastName'),
+	   ('2423233436', '24456789','some2.email@gmail.com',
+	   'some2FirstName', 'some2LastName'),
+	   ('1425233435', '53456789','some3.email@gmail.com',
+	   'some3FirstName', 'some3LastName');
+
+INSERT INTO driving_instructor(first_name, last_name, work_phone)
+VALUES ('someInstructor', 'someInstructorLastName', '45362324'),
+('some2Instructor', 'some2InstructorLastName', '75362324');
+
+INSERT INTO driving_hours(date_for_driving, instructor_id, customer_id)
+VALUES (NOW(), 1, 2), (NOW(), 2, 2), ('04-06-2021', 1, 1);
+
 
 SELECT dh.date_for_driving, di.first_name, di.last_name
 FROM driving_hours dh, driving_instructur di, business_customer bs, business_customer_part_of bcpo
@@ -77,6 +91,6 @@ AND bs.id = dh.customer_id AND bcpo.customer_id = bs.id
 AND bcpo = 1;
 
 SELECT first_name, last_name, (SELECT COUNT(*) FROM driving_hours WHERE instructor_id = 1) 
-FROM driving_instructur WHERE id = 1;
+FROM driving_instructor WHERE id = 1;
 
 
